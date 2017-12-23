@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccountTrans">
+    <Key>
+      <PropertyRef Name="TranID" />
+      <PropertyRef Name="RefDate" />
+    </Key>
+    <Property Name="TranID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TranDate" Type="datetime" Nullable="false" />
+    <Property Name="TranType" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="DocDate" Type="datetime" />
+    <Property Name="RefNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="RefDate" Type="datetime" Nullable="false" />
+    <Property Name="Des_StationID" Type="nvarchar" MaxLength="20" />
+    <Property Name="Dep_StationID" Type="nvarchar" MaxLength="20" />
+    <Property Name="Descr" Type="nvarchar" MaxLength="200" />
+    <Property Name="CostVol" Type="int" />
+    <Property Name="ActVol" Type="int" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DAcc" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="CAcc" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="OrigAmt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="SlsPerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="D_CustID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="C_CustID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Released" Type="int" Nullable="false" />
+    <Property Name="Completed" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustID" />
+    </Key>
+    <Property Name="CustID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CustName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="CMT" Type="nvarchar" MaxLength="30" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="30" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="30" />
+    <Property Name="VATCode" Type="nvarchar" MaxLength="30" />
+    <Property Name="CustType" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="CustDescr" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="ReceiptVoucher">
+    <Key>
+      <PropertyRef Name="VoucherID" />
+    </Key>
+    <Property Name="VoucherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VoucherDate" Type="datetime" Nullable="false" />
+    <Property Name="SlsPerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Payer" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="MVoucherDescr" Type="nvarchar" MaxLength="200" />
+    <Property Name="MAttachDescr" Type="nvarchar" MaxLength="200" />
+    <Property Name="TotalAmt" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Released" Type="int" Nullable="false" />
+    <Property Name="EnterDate" Type="datetime" />
+    <Property Name="EmployeeID" Type="nvarchar" MaxLength="30" />
+    <Property Name="Used" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RVoucherDet">
+    <Key>
+      <PropertyRef Name="VoucherDetID" />
+    </Key>
+    <Property Name="VoucherDetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VMainID" Type="int" />
+    <Property Name="CustID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="VoucherDescr" Type="nvarchar" MaxLength="200" />
+    <Property Name="AttachDescr" Type="nvarchar" MaxLength="200" />
+    <Property Name="DAcc" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="CAcc" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="AccAmt" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="SalesPerson">
+    <Key>
+      <PropertyRef Name="SlsPerID" />
+    </Key>
+    <Property Name="SlsPerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SlsPerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="CMT" Type="nvarchar" MaxLength="30" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="CustID" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="int" />
+    <Property Name="SlsPerDescr" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TranTypes">
+    <Key>
+      <PropertyRef Name="TranType" />
+    </Key>
+    <Property Name="TranType" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="TranTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TranTypeDescr" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TMS.dbo.ShowReceipt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ShowReceipt">
+    <Key>
+      <PropertyRef Name="VoucherID" />
+      <PropertyRef Name="VoucherDate" />
+      <PropertyRef Name="SlsPerName" />
+      <PropertyRef Name="Payer" />
+    </Key>
+    <Property Name="VoucherID" Type="int" Nullable="false" />
+    <Property Name="VoucherDate" Type="datetime" Nullable="false" />
+    <Property Name="SlsPerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Payer" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="TotalAmt" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="MVoucherDescr" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <Function Name="FindCustByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ShowAccountTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ShowDetailReceipt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ShowReceipt_SlsPer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ShowReceipt_Time" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="TMSModelStoreContainer">
+    <EntitySet Name="AccountTrans" EntityType="Self.AccountTrans" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReceiptVoucher" EntityType="Self.ReceiptVoucher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RVoucherDet" EntityType="Self.RVoucherDet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesPerson" EntityType="Self.SalesPerson" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TranTypes" EntityType="Self.TranTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShowReceipt" EntityType="Self.ShowReceipt" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ShowReceipt].[VoucherID] AS [VoucherID], 
+    [ShowReceipt].[VoucherDate] AS [VoucherDate], 
+    [ShowReceipt].[SlsPerName] AS [SlsPerName], 
+    [ShowReceipt].[Payer] AS [Payer], 
+    [ShowReceipt].[PAddress] AS [PAddress], 
+    [ShowReceipt].[TotalAmt] AS [TotalAmt], 
+    [ShowReceipt].[MVoucherDescr] AS [MVoucherDescr]
+    FROM [dbo].[ShowReceipt] AS [ShowReceipt]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

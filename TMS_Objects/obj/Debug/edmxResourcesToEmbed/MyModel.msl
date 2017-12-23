@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TMSModelStoreContainer" CdmEntityContainer="TMSEntities">
+    <EntitySetMapping Name="AccountTrans">
+      <EntityTypeMapping TypeName="TMSModel.AccountTran">
+        <MappingFragment StoreEntitySet="AccountTrans">
+          <ScalarProperty Name="TranID" ColumnName="TranID" />
+          <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+          <ScalarProperty Name="TranType" ColumnName="TranType" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+          <ScalarProperty Name="RefDate" ColumnName="RefDate" />
+          <ScalarProperty Name="Des_StationID" ColumnName="Des_StationID" />
+          <ScalarProperty Name="Dep_StationID" ColumnName="Dep_StationID" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="CostVol" ColumnName="CostVol" />
+          <ScalarProperty Name="ActVol" ColumnName="ActVol" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="DAcc" ColumnName="DAcc" />
+          <ScalarProperty Name="CAcc" ColumnName="CAcc" />
+          <ScalarProperty Name="OrigAmt" ColumnName="OrigAmt" />
+          <ScalarProperty Name="SlsPerID" ColumnName="SlsPerID" />
+          <ScalarProperty Name="D_CustID" ColumnName="D_CustID" />
+          <ScalarProperty Name="C_CustID" ColumnName="C_CustID" />
+          <ScalarProperty Name="Released" ColumnName="Released" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="TMSModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CMT" ColumnName="CMT" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="VATCode" ColumnName="VATCode" />
+          <ScalarProperty Name="CustType" ColumnName="CustType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CustDescr" ColumnName="CustDescr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReceiptVouchers">
+      <EntityTypeMapping TypeName="TMSModel.ReceiptVoucher">
+        <MappingFragment StoreEntitySet="ReceiptVoucher">
+          <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+          <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+          <ScalarProperty Name="SlsPerID" ColumnName="SlsPerID" />
+          <ScalarProperty Name="Payer" ColumnName="Payer" />
+          <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+          <ScalarProperty Name="MVoucherDescr" ColumnName="MVoucherDescr" />
+          <ScalarProperty Name="MAttachDescr" ColumnName="MAttachDescr" />
+          <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+          <ScalarProperty Name="Released" ColumnName="Released" />
+          <ScalarProperty Name="EnterDate" ColumnName="EnterDate" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="Used" ColumnName="Used" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RVoucherDets">
+      <EntityTypeMapping TypeName="TMSModel.RVoucherDet">
+        <MappingFragment StoreEntitySet="RVoucherDet">
+          <ScalarProperty Name="VoucherDetID" ColumnName="VoucherDetID" />
+          <ScalarProperty Name="VMainID" ColumnName="VMainID" />
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="VoucherDescr" ColumnName="VoucherDescr" />
+          <ScalarProperty Name="AttachDescr" ColumnName="AttachDescr" />
+          <ScalarProperty Name="DAcc" ColumnName="DAcc" />
+          <ScalarProperty Name="CAcc" ColumnName="CAcc" />
+          <ScalarProperty Name="AccAmt" ColumnName="AccAmt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesPersons">
+      <EntityTypeMapping TypeName="TMSModel.SalesPerson">
+        <MappingFragment StoreEntitySet="SalesPerson">
+          <ScalarProperty Name="SlsPerID" ColumnName="SlsPerID" />
+          <ScalarProperty Name="SlsPerName" ColumnName="SlsPerName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CMT" ColumnName="CMT" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SlsPerDescr" ColumnName="SlsPerDescr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TranTypes">
+      <EntityTypeMapping TypeName="TMSModel.TranType">
+        <MappingFragment StoreEntitySet="TranTypes">
+          <ScalarProperty Name="TranType1" ColumnName="TranType" />
+          <ScalarProperty Name="TranTypeName" ColumnName="TranTypeName" />
+          <ScalarProperty Name="TranTypeDescr" ColumnName="TranTypeDescr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShowReceipts">
+      <EntityTypeMapping TypeName="TMSModel.ShowReceipt">
+        <MappingFragment StoreEntitySet="ShowReceipt">
+          <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+          <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+          <ScalarProperty Name="SlsPerName" ColumnName="SlsPerName" />
+          <ScalarProperty Name="Payer" ColumnName="Payer" />
+          <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+          <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+          <ScalarProperty Name="MVoucherDescr" ColumnName="MVoucherDescr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="FindCustByID" FunctionName="TMSModel.Store.FindCustByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TMSModel.FindCustByID_Result">
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CMT" ColumnName="CMT" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="VATCode" ColumnName="VATCode" />
+          <ScalarProperty Name="CustType" ColumnName="CustType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CustDescr" ColumnName="CustDescr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ShowAccountTrans" FunctionName="TMSModel.Store.ShowAccountTrans">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TMSModel.ShowAccountTrans_Result">
+          <ScalarProperty Name="TranID" ColumnName="TranID" />
+          <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+          <ScalarProperty Name="TranType" ColumnName="TranType" />
+          <ScalarProperty Name="TranTypeName" ColumnName="TranTypeName" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+          <ScalarProperty Name="RefDate" ColumnName="RefDate" />
+          <ScalarProperty Name="Des_StationID" ColumnName="Des_StationID" />
+          <ScalarProperty Name="Dep_StationID" ColumnName="Dep_StationID" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="CostVol" ColumnName="CostVol" />
+          <ScalarProperty Name="ActVol" ColumnName="ActVol" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="DAcc" ColumnName="DAcc" />
+          <ScalarProperty Name="CAcc" ColumnName="CAcc" />
+          <ScalarProperty Name="OrigAmt" ColumnName="OrigAmt" />
+          <ScalarProperty Name="SlsPerID" ColumnName="SlsPerID" />
+          <ScalarProperty Name="D_CustID" ColumnName="D_CustID" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="C_CustID" ColumnName="C_CustID" />
+          <ScalarProperty Name="Released" ColumnName="Released" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ShowDetailReceipt" FunctionName="TMSModel.Store.ShowDetailReceipt">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TMSModel.ShowDetailReceipt_Result">
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="AccAmt" ColumnName="AccAmt" />
+          <ScalarProperty Name="DAcc" ColumnName="DAcc" />
+          <ScalarProperty Name="CAcc" ColumnName="CAcc" />
+          <ScalarProperty Name="VoucherDescr" ColumnName="VoucherDescr" />
+          <ScalarProperty Name="AttachDescr" ColumnName="AttachDescr" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ShowReceipt_SlsPer" FunctionName="TMSModel.Store.ShowReceipt_SlsPer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TMSModel.ShowReceipt_SlsPer_Result">
+          <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+          <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+          <ScalarProperty Name="SlsPerName" ColumnName="SlsPerName" />
+          <ScalarProperty Name="Payer" ColumnName="Payer" />
+          <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+          <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+          <ScalarProperty Name="MVoucherDescr" ColumnName="MVoucherDescr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ShowReceipt_Time" FunctionName="TMSModel.Store.ShowReceipt_Time">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TMSModel.ShowReceipt_Time_Result">
+          <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+          <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+          <ScalarProperty Name="SlsPerName" ColumnName="SlsPerName" />
+          <ScalarProperty Name="Payer" ColumnName="Payer" />
+          <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+          <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+          <ScalarProperty Name="MVoucherDescr" ColumnName="MVoucherDescr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

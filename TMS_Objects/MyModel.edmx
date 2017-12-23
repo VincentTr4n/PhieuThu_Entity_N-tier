@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountTrans">
+          <Key>
+            <PropertyRef Name="TranID" />
+            <PropertyRef Name="RefDate" />
+          </Key>
+          <Property Name="TranID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TranDate" Type="datetime" Nullable="false" />
+          <Property Name="TranType" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="DocDate" Type="datetime" />
+          <Property Name="RefNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RefDate" Type="datetime" Nullable="false" />
+          <Property Name="Des_StationID" Type="nvarchar" MaxLength="20" />
+          <Property Name="Dep_StationID" Type="nvarchar" MaxLength="20" />
+          <Property Name="Descr" Type="nvarchar" MaxLength="200" />
+          <Property Name="CostVol" Type="int" />
+          <Property Name="ActVol" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DAcc" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CAcc" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="OrigAmt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SlsPerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="D_CustID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="C_CustID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Released" Type="int" Nullable="false" />
+          <Property Name="Completed" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CustName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="CMT" Type="nvarchar" MaxLength="30" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="30" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="30" />
+          <Property Name="VATCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustType" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CustDescr" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ReceiptVoucher">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+          </Key>
+          <Property Name="VoucherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoucherDate" Type="datetime" Nullable="false" />
+          <Property Name="SlsPerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Payer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="MVoucherDescr" Type="nvarchar" MaxLength="200" />
+          <Property Name="MAttachDescr" Type="nvarchar" MaxLength="200" />
+          <Property Name="TotalAmt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Released" Type="int" Nullable="false" />
+          <Property Name="EnterDate" Type="datetime" />
+          <Property Name="EmployeeID" Type="nvarchar" MaxLength="30" />
+          <Property Name="Used" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RVoucherDet">
+          <Key>
+            <PropertyRef Name="VoucherDetID" />
+          </Key>
+          <Property Name="VoucherDetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VMainID" Type="int" />
+          <Property Name="CustID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="VoucherDescr" Type="nvarchar" MaxLength="200" />
+          <Property Name="AttachDescr" Type="nvarchar" MaxLength="200" />
+          <Property Name="DAcc" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="CAcc" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="AccAmt" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="SalesPerson">
+          <Key>
+            <PropertyRef Name="SlsPerID" />
+          </Key>
+          <Property Name="SlsPerID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SlsPerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="CMT" Type="nvarchar" MaxLength="30" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustID" Type="nvarchar" MaxLength="20" />
+          <Property Name="Status" Type="int" />
+          <Property Name="SlsPerDescr" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TranTypes">
+          <Key>
+            <PropertyRef Name="TranType" />
+          </Key>
+          <Property Name="TranType" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="TranTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TranTypeDescr" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TMS.dbo.ShowReceipt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ShowReceipt">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+            <PropertyRef Name="VoucherDate" />
+            <PropertyRef Name="SlsPerName" />
+            <PropertyRef Name="Payer" />
+          </Key>
+          <Property Name="VoucherID" Type="int" Nullable="false" />
+          <Property Name="VoucherDate" Type="datetime" Nullable="false" />
+          <Property Name="SlsPerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Payer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="TotalAmt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MVoucherDescr" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Function Name="FindCustByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ShowAccountTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ShowDetailReceipt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ShowReceipt_SlsPer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ShowReceipt_Time" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="TMSModelStoreContainer">
+          <EntitySet Name="AccountTrans" EntityType="Self.AccountTrans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptVoucher" EntityType="Self.ReceiptVoucher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RVoucherDet" EntityType="Self.RVoucherDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesPerson" EntityType="Self.SalesPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranTypes" EntityType="Self.TranTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShowReceipt" EntityType="Self.ShowReceipt" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ShowReceipt].[VoucherID] AS [VoucherID], 
+    [ShowReceipt].[VoucherDate] AS [VoucherDate], 
+    [ShowReceipt].[SlsPerName] AS [SlsPerName], 
+    [ShowReceipt].[Payer] AS [Payer], 
+    [ShowReceipt].[PAddress] AS [PAddress], 
+    [ShowReceipt].[TotalAmt] AS [TotalAmt], 
+    [ShowReceipt].[MVoucherDescr] AS [MVoucherDescr]
+    FROM [dbo].[ShowReceipt] AS [ShowReceipt]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountTran">
+          <Key>
+            <PropertyRef Name="TranID" />
+            <PropertyRef Name="RefDate" />
+          </Key>
+          <Property Name="TranID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TranDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TranType" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DocDate" Type="DateTime" Precision="3" />
+          <Property Name="RefNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RefDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Des_StationID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Dep_StationID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Descr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CostVol" Type="Int32" />
+          <Property Name="ActVol" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DAcc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CAcc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="OrigAmt" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SlsPerID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="D_CustID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="C_CustID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Released" Type="Int32" Nullable="false" />
+          <Property Name="Completed" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CMT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="VATCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustType" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CustDescr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ReceiptVoucher">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+          </Key>
+          <Property Name="VoucherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SlsPerID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Payer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MVoucherDescr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MAttachDescr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Released" Type="Int32" Nullable="false" />
+          <Property Name="EnterDate" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Used" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RVoucherDet">
+          <Key>
+            <PropertyRef Name="VoucherDetID" />
+          </Key>
+          <Property Name="VoucherDetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VMainID" Type="Int32" />
+          <Property Name="CustID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VoucherDescr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AttachDescr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DAcc" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CAcc" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="AccAmt" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="SalesPerson">
+          <Key>
+            <PropertyRef Name="SlsPerID" />
+          </Key>
+          <Property Name="SlsPerID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SlsPerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CMT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="SlsPerDescr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TranType">
+          <Key>
+            <PropertyRef Name="TranType1" />
+          </Key>
+          <Property Name="TranType1" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TranTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TranTypeDescr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShowReceipt">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+            <PropertyRef Name="VoucherDate" />
+            <PropertyRef Name="SlsPerName" />
+            <PropertyRef Name="Payer" />
+          </Key>
+          <Property Name="VoucherID" Type="Int32" Nullable="false" />
+          <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SlsPerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Payer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MVoucherDescr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="TMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountTrans" EntityType="Self.AccountTran" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="ReceiptVouchers" EntityType="Self.ReceiptVoucher" />
+          <EntitySet Name="RVoucherDets" EntityType="Self.RVoucherDet" />
+          <EntitySet Name="SalesPersons" EntityType="Self.SalesPerson" />
+          <EntitySet Name="TranTypes" EntityType="Self.TranType" />
+          <EntitySet Name="ShowReceipts" EntityType="Self.ShowReceipt" />
+          <FunctionImport Name="FindCustByID" ReturnType="Collection(TMSModel.FindCustByID_Result)">
+            <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ShowAccountTrans" ReturnType="Collection(TMSModel.ShowAccountTrans_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ShowDetailReceipt" ReturnType="Collection(TMSModel.ShowDetailReceipt_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ShowReceipt_SlsPer" ReturnType="Collection(TMSModel.ShowReceipt_SlsPer_Result)">
+            <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ShowReceipt_Time" ReturnType="Collection(TMSModel.ShowReceipt_Time_Result)">
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="FindCustByID_Result">
+          <Property Type="String" Name="CustID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="CustName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CMT" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="VATCode" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="CustType" Nullable="true" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="String" Name="CustDescr" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="ShowAccountTrans_Result">
+          <Property Type="Int32" Name="TranID" Nullable="false" />
+          <Property Type="DateTime" Name="TranDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TranType" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="TranTypeName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="DocDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="RefNo" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="RefDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Des_StationID" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Dep_StationID" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Descr" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="CostVol" Nullable="true" />
+          <Property Type="Int32" Name="ActVol" Nullable="true" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="DAcc" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CAcc" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="OrigAmt" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="SlsPerID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="D_CustID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="CustName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="C_CustID" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="Released" Nullable="false" />
+          <Property Type="Int32" Name="Completed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ShowDetailReceipt_Result">
+          <Property Type="String" Name="CustID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="CustName" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="AccAmt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="DAcc" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CAcc" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="VoucherDescr" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AttachDescr" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="ShowReceipt_SlsPer_Result">
+          <Property Type="Int32" Name="VoucherID" Nullable="false" />
+          <Property Type="DateTime" Name="VoucherDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="SlsPerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Payer" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PAddress" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="TotalAmt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="MVoucherDescr" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="ShowReceipt_Time_Result">
+          <Property Type="Int32" Name="VoucherID" Nullable="false" />
+          <Property Type="DateTime" Name="VoucherDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="SlsPerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Payer" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PAddress" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="TotalAmt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="MVoucherDescr" Nullable="true" MaxLength="200" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TMSModelStoreContainer" CdmEntityContainer="TMSEntities">
+          <EntitySetMapping Name="AccountTrans">
+            <EntityTypeMapping TypeName="TMSModel.AccountTran">
+              <MappingFragment StoreEntitySet="AccountTrans">
+                <ScalarProperty Name="TranID" ColumnName="TranID" />
+                <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+                <ScalarProperty Name="TranType" ColumnName="TranType" />
+                <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+                <ScalarProperty Name="RefDate" ColumnName="RefDate" />
+                <ScalarProperty Name="Des_StationID" ColumnName="Des_StationID" />
+                <ScalarProperty Name="Dep_StationID" ColumnName="Dep_StationID" />
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
+                <ScalarProperty Name="CostVol" ColumnName="CostVol" />
+                <ScalarProperty Name="ActVol" ColumnName="ActVol" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DAcc" ColumnName="DAcc" />
+                <ScalarProperty Name="CAcc" ColumnName="CAcc" />
+                <ScalarProperty Name="OrigAmt" ColumnName="OrigAmt" />
+                <ScalarProperty Name="SlsPerID" ColumnName="SlsPerID" />
+                <ScalarProperty Name="D_CustID" ColumnName="D_CustID" />
+                <ScalarProperty Name="C_CustID" ColumnName="C_CustID" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="TMSModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CMT" ColumnName="CMT" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="VATCode" ColumnName="VATCode" />
+                <ScalarProperty Name="CustType" ColumnName="CustType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CustDescr" ColumnName="CustDescr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptVouchers">
+            <EntityTypeMapping TypeName="TMSModel.ReceiptVoucher">
+              <MappingFragment StoreEntitySet="ReceiptVoucher">
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+                <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+                <ScalarProperty Name="SlsPerID" ColumnName="SlsPerID" />
+                <ScalarProperty Name="Payer" ColumnName="Payer" />
+                <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+                <ScalarProperty Name="MVoucherDescr" ColumnName="MVoucherDescr" />
+                <ScalarProperty Name="MAttachDescr" ColumnName="MAttachDescr" />
+                <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="EnterDate" ColumnName="EnterDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Used" ColumnName="Used" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RVoucherDets">
+            <EntityTypeMapping TypeName="TMSModel.RVoucherDet">
+              <MappingFragment StoreEntitySet="RVoucherDet">
+                <ScalarProperty Name="VoucherDetID" ColumnName="VoucherDetID" />
+                <ScalarProperty Name="VMainID" ColumnName="VMainID" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="VoucherDescr" ColumnName="VoucherDescr" />
+                <ScalarProperty Name="AttachDescr" ColumnName="AttachDescr" />
+                <ScalarProperty Name="DAcc" ColumnName="DAcc" />
+                <ScalarProperty Name="CAcc" ColumnName="CAcc" />
+                <ScalarProperty Name="AccAmt" ColumnName="AccAmt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesPersons">
+            <EntityTypeMapping TypeName="TMSModel.SalesPerson">
+              <MappingFragment StoreEntitySet="SalesPerson">
+                <ScalarProperty Name="SlsPerID" ColumnName="SlsPerID" />
+                <ScalarProperty Name="SlsPerName" ColumnName="SlsPerName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CMT" ColumnName="CMT" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SlsPerDescr" ColumnName="SlsPerDescr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TranTypes">
+            <EntityTypeMapping TypeName="TMSModel.TranType">
+              <MappingFragment StoreEntitySet="TranTypes">
+                <ScalarProperty Name="TranType1" ColumnName="TranType" />
+                <ScalarProperty Name="TranTypeName" ColumnName="TranTypeName" />
+                <ScalarProperty Name="TranTypeDescr" ColumnName="TranTypeDescr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShowReceipts">
+            <EntityTypeMapping TypeName="TMSModel.ShowReceipt">
+              <MappingFragment StoreEntitySet="ShowReceipt">
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+                <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+                <ScalarProperty Name="SlsPerName" ColumnName="SlsPerName" />
+                <ScalarProperty Name="Payer" ColumnName="Payer" />
+                <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+                <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+                <ScalarProperty Name="MVoucherDescr" ColumnName="MVoucherDescr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="FindCustByID" FunctionName="TMSModel.Store.FindCustByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TMSModel.FindCustByID_Result">
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CMT" ColumnName="CMT" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="VATCode" ColumnName="VATCode" />
+                <ScalarProperty Name="CustType" ColumnName="CustType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CustDescr" ColumnName="CustDescr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ShowAccountTrans" FunctionName="TMSModel.Store.ShowAccountTrans">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TMSModel.ShowAccountTrans_Result">
+                <ScalarProperty Name="TranID" ColumnName="TranID" />
+                <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+                <ScalarProperty Name="TranType" ColumnName="TranType" />
+                <ScalarProperty Name="TranTypeName" ColumnName="TranTypeName" />
+                <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+                <ScalarProperty Name="RefDate" ColumnName="RefDate" />
+                <ScalarProperty Name="Des_StationID" ColumnName="Des_StationID" />
+                <ScalarProperty Name="Dep_StationID" ColumnName="Dep_StationID" />
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
+                <ScalarProperty Name="CostVol" ColumnName="CostVol" />
+                <ScalarProperty Name="ActVol" ColumnName="ActVol" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DAcc" ColumnName="DAcc" />
+                <ScalarProperty Name="CAcc" ColumnName="CAcc" />
+                <ScalarProperty Name="OrigAmt" ColumnName="OrigAmt" />
+                <ScalarProperty Name="SlsPerID" ColumnName="SlsPerID" />
+                <ScalarProperty Name="D_CustID" ColumnName="D_CustID" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="C_CustID" ColumnName="C_CustID" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ShowDetailReceipt" FunctionName="TMSModel.Store.ShowDetailReceipt">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TMSModel.ShowDetailReceipt_Result">
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="AccAmt" ColumnName="AccAmt" />
+                <ScalarProperty Name="DAcc" ColumnName="DAcc" />
+                <ScalarProperty Name="CAcc" ColumnName="CAcc" />
+                <ScalarProperty Name="VoucherDescr" ColumnName="VoucherDescr" />
+                <ScalarProperty Name="AttachDescr" ColumnName="AttachDescr" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ShowReceipt_SlsPer" FunctionName="TMSModel.Store.ShowReceipt_SlsPer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TMSModel.ShowReceipt_SlsPer_Result">
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+                <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+                <ScalarProperty Name="SlsPerName" ColumnName="SlsPerName" />
+                <ScalarProperty Name="Payer" ColumnName="Payer" />
+                <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+                <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+                <ScalarProperty Name="MVoucherDescr" ColumnName="MVoucherDescr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ShowReceipt_Time" FunctionName="TMSModel.Store.ShowReceipt_Time">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TMSModel.ShowReceipt_Time_Result">
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
+                <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+                <ScalarProperty Name="SlsPerName" ColumnName="SlsPerName" />
+                <ScalarProperty Name="Payer" ColumnName="Payer" />
+                <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+                <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+                <ScalarProperty Name="MVoucherDescr" ColumnName="MVoucherDescr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

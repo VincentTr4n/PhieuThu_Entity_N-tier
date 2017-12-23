@@ -1,0 +1,10 @@
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\bin\Debug\TMS_Objects.dll
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\bin\Debug\TMS_Objects.pdb
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\obj\Debug\TMS_Objects.dll
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\obj\Debug\TMS_Objects.pdb
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\bin\Debug\EntityFramework.dll
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\bin\Debug\EntityFramework.SqlServer.dll
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\bin\Debug\EntityFramework.xml
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\bin\Debug\EntityFramework.SqlServer.xml
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\bin\Debug\TMS_Objects.dll.config
+D:\MyWorkSpace\Practice_DotNet\PhieuNhap\TMS_Objects\obj\Debug\TMS_Objects.csprojResolveAssemblyReference.cache
